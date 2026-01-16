@@ -21,22 +21,28 @@ jobs:
           submodules: true
           lfs: false
 
-      # 2️⃣ Set Node version for Actions (optional for npm, but Oryx ignores this)
-      - name: Set Node.js version
+      # 2️⃣ Set Node version
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # 3️⃣ Build & deploy to Azure Static Web Apps
-      - name: Build And Deploy
-        id: builddeploy
+      # 3️⃣ Install dependencies
+      - name: Install Dependencies
+        run: npm ci
+
+      # 4️⃣ Build the Next.js App Router app
+      - name: Build App
+        run: npm run build
+
+      # 5️⃣ Deploy to Azure Static Web Apps
+      - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
-        env:
-          NODE_VERSION: 20.9.0  # 🔴 FORCE Node 20 for Oryx build
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_LEMON_WATER_018C0390F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/"       
-          api_location: ""       
-          output_location: ".next"
+          app_location: "/"         # repo root
+          api_location: ""          # no API
+          output_location: ".next"  # Next.js App Router output
+          skip_app_build: true      # important: skip Oryx build, we already ran npm run build
