@@ -17,7 +17,7 @@ export default function Hero() {
           <div className="w-20 h-1 bg-gradient-to-r from-[#5b1d1b] to-white/50 rounded-full"></div>
         </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" style={{ fontFamily: "'Merriweather', serif" }}>
-          Professional Facility Management Solutions
+         Creating Better Built Environments
         </h1>
         <p className="text-lg md:text-xl lg:text-2xl mb-10 text-gray-200 max-w-3xl mx-auto leading-relaxed">
           Excellence in service, reliability in every detail
